@@ -1,0 +1,4 @@
+.eslintrc.js
+**/metro.config.js
+**/babel.config.js
+**/tsconfig.json

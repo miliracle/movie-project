@@ -1,0 +1,25 @@
+{
+  "name": "movie-project",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.11.25",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.0",
+    "typescript-eslint": "^7.1.1"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "version": "0.0.0",
+  "npmClient": "yarn",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx packages/ apps/"
+  }
+}
