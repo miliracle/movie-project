@@ -9,6 +9,7 @@ import useMediaQuery from '../../common/hooks/useMediaQuery';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../app/App';
 import { Movie } from '@movie-project/movie-sdk/dist/model';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const styles = StyleSheet.create({
   container: {
@@ -62,17 +63,19 @@ function SearchMoviesScreen({ navigation }: Props) {
           <View style={[styles.listContainer, {
             width: mQ([240, 760, 760, 1020, 1280])
           }]}>
-            {!loading && movies.map((movie) =>
-              <Pressable
-                key={movie.id}
-                onPress={() => goToMovieDetail(movie)}
-              >
-                <MovieCard
+            {loading ? 
+              <LoadingSpinner /> :
+              movies.map((movie) =>
+                <Pressable
                   key={movie.id}
-                  id={movie.title}
-                  poster={movie.poster || ''}
-                  title={movie.title} />
-              </Pressable>
+                  onPress={() => goToMovieDetail(movie)}
+                >
+                  <MovieCard
+                    key={movie.id}
+                    id={movie.title}
+                    poster={movie.poster || ''}
+                    title={movie.title} />                
+                </Pressable>
             )}
           </View>
         </View>

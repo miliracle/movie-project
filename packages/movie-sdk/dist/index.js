@@ -65,22 +65,23 @@ var MovieSDK = /** @class */ (function () {
     MovieSDK.prototype.getMovieDetail = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var response, data, movie, actor, reviews;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0: return [4 /*yield*/, fetch("".concat(this.apiBaseUrl, "?tt=").concat(id), {
                             headers: this.headers,
                         })];
                     case 1:
-                        response = _a.sent();
+                        response = _d.sent();
                         if (!response.ok) {
                             throw new Error('Failed to fetch detail movies by id: ' + id);
                         }
                         return [4 /*yield*/, response.json()];
                     case 2:
-                        data = _a.sent();
+                        data = _d.sent();
                         movie = data.short;
                         actor = data.short.actor.map(function (rawActor) { return new Actor(rawActor.name, rawActor.url); });
-                        reviews = movie.review ? [new Review(movie.review.author.name, movie.review.name, movie.review.reviewRating.ratingValue, movie.review.reviewBody, movie.review.dateCreated)] : [];
+                        reviews = movie.review ? [new Review((_a = movie.review.author) === null || _a === void 0 ? void 0 : _a.name, (_b = movie.review) === null || _b === void 0 ? void 0 : _b.name, (_c = movie.review.reviewRating) === null || _c === void 0 ? void 0 : _c.ratingValue, movie.review.reviewBody, movie.review.dateCreated)] : [];
                         return [2 /*return*/, new Movie(data.imdbId, movie.name, movie.image, movie.description, actor, reviews, movie.keywords.split(','))];
                 }
             });

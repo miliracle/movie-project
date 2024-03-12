@@ -42,10 +42,7 @@ export const fetchDetailMovieAsync = (preloadData: Movie) => {
   
         const movieDetail = await moviesSDK.getMovieDetail(preloadData.id)
   
-        dispatch(setMovieDetail({
-          ...preloadData,
-          ...movieDetail
-        }));
+        dispatch(setMovieDetail(movieDetail));
       } catch (error) {
         console.error('Error fetching movie detail:', error);
       } finally {

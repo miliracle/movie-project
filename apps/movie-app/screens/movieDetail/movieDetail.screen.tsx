@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../common/hooks/reduxHooks';
 import { fetchDetailMovieAsync, selectMovieDetail, selectMovieDetailLoading } from './movieDetail.slice';
 import { RootStackParamList } from '../../app/App';
 import useMediaQuery from '../../common/hooks/useMediaQuery';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 
 const styles = StyleSheet.create({
@@ -84,7 +85,7 @@ function MovieDetailScreen(props: Props) {
 
             <ScrollView style={styles.scrollContainer}>
 
-                {!loading && (
+                {loading ? <LoadingSpinner /> : (
                     <View style={styles.movieWrapper}>
                         <View style={styles.movieContainer}>
                             <View style={[styles.movieDetail, mQL({base: {flexDirection: 'column'}, md: {flexDirection: 'row'}})]}>

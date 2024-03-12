@@ -35,7 +35,7 @@ class MovieSDK {
         const data = await response.json() as MovieDetailResponse;
         const movie = data.short;
         const actor = data.short.actor.map(rawActor => new Actor(rawActor.name, rawActor.url))
-        const reviews = movie.review ? [new Review(movie.review.author.name, movie.review.name, movie.review.reviewRating.ratingValue, movie.review.reviewBody, movie.review.dateCreated)]: []
+        const reviews = movie.review ? [new Review(movie.review.author?.name, movie.review?.name, movie.review.reviewRating?.ratingValue, movie.review.reviewBody, movie.review.dateCreated)]: []
         return new Movie(data.imdbId, movie.name, movie.image ,movie.description, actor, reviews, movie.keywords.split(','));
     }
 }
