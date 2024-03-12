@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
-import { selectMovies, selectLoading, fetchMoviesAsync } from './movies.slice';
+import { View, ScrollView, StyleSheet, Pressable } from 'react-native';
+import { selectMovies, selectLoading, fetchMoviesAsync } from './searchMovies.slice';
 import { useAppDispatch, useAppSelector } from '../../common/hooks/reduxHooks';
-// import styles from '../../common/style';
 import SearchBar from '../../components/SearchBar';
 import MovieCard from '../../components/MovieCard';
 import { useState } from 'react';
 import useMediaQuery from '../../common/hooks/useMediaQuery';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../app/App';
+import { Movie } from '@movie-project/movie-sdk/dist/model';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,14 +30,10 @@ const styles = StyleSheet.create({
   },
 })
 
-function MoviesScreen() {
-  const { mQ } = useMediaQuery({
-    base: 0,
-    sm: 768,
-    md: 992,
-    lg: 1200,
-    xl: 1400,
-  });
+type Props = NativeStackScreenProps<RootStackParamList, 'SeachMovies'>;
+
+function SearchMoviesScreen({ navigation }: Props) {
+  const { mQ } = useMediaQuery();
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -45,6 +43,10 @@ function MoviesScreen() {
   const dispatch = useAppDispatch();
   const movies = useAppSelector(selectMovies);
   const loading = useAppSelector(selectLoading);
+
+  function goToMovieDetail(movie: Movie) {
+    navigation.navigate('MovieDetail', { movie })
+  }
 
   React.useEffect(() => {
     dispatch(fetchMoviesAsync(searchQuery));
@@ -57,20 +59,26 @@ function MoviesScreen() {
       </View>
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.listWrapper}>
-          <View style={
-            { ...styles.listContainer, 
-              width: mQ([240, 760, 760, 1020, 1280]) 
-            }}>
-              {!loading && movies.map((movie) => <MovieCard
-                key={movie.title}
-                id={movie.title}
-                poster={movie.poster || ''}
-                title={movie.title} />)}
-            </View>
+          <View style={[styles.listContainer, {
+            width: mQ([240, 760, 760, 1020, 1280])
+          }]}>
+            {!loading && movies.map((movie) =>
+              <Pressable
+                key={movie.id}
+                onPress={() => goToMovieDetail(movie)}
+              >
+                <MovieCard
+                  key={movie.id}
+                  id={movie.title}
+                  poster={movie.poster || ''}
+                  title={movie.title} />
+              </Pressable>
+            )}
+          </View>
         </View>
       </ScrollView>
     </View>
   );
 }
 
-export default MoviesScreen
+export default SearchMoviesScreen

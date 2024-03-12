@@ -1,5 +1,6 @@
 var Movie = /** @class */ (function () {
-    function Movie(title, poster, description, actors, reviews, keywords) {
+    function Movie(id, title, poster, description, actors, reviews, keywords) {
+        this.id = id;
         this.title = title;
         this.poster = poster;
         this.description = description;
@@ -17,11 +18,12 @@ var Actor = /** @class */ (function () {
     return Actor;
 }());
 var Review = /** @class */ (function () {
-    function Review(name, avatar, rate, comment) {
-        this.name = name;
-        this.avatar = avatar;
+    function Review(author, title, rate, comment, date) {
+        this.author = author;
+        this.title = title;
         this.rate = rate;
         this.comment = comment;
+        this.date = date;
     }
     return Review;
 }());

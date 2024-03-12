@@ -1,6 +1,5 @@
-import { Actor, Movie } from "./model";
+import { Actor, Movie, Review } from "./model";
 import { MovieDetailResponse, SearchMoviesResponse } from "./response";
-
 
 class MovieSDK {
     private headers: Headers;
@@ -21,7 +20,7 @@ class MovieSDK {
         }
 
         const data = await response.json() as SearchMoviesResponse;
-        return data.description.map(movie => new Movie(movie["#TITLE"], movie["#IMG_POSTER"]))
+        return data.description.map(movie => new Movie(movie["#IMDB_ID"], movie["#TITLE"], movie["#IMG_POSTER"]))
     }
 
     async getMovieDetail(id: string): Promise<Movie>  {
@@ -36,7 +35,8 @@ class MovieSDK {
         const data = await response.json() as MovieDetailResponse;
         const movie = data.short;
         const actor = data.short.actor.map(rawActor => new Actor(rawActor.name, rawActor.url))
-        return new Movie(movie.name, "" ,movie.description, actor, [], []);
+        const reviews = movie.review ? [new Review(movie.review.author.name, movie.review.name, movie.review.reviewRating.ratingValue, movie.review.reviewBody, movie.review.dateCreated)]: []
+        return new Movie(data.imdbId, movie.name, movie.image ,movie.description, actor, reviews, movie.keywords.split(','));
     }
 }
 

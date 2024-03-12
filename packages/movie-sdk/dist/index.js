@@ -34,7 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { Actor, Movie } from "./model";
+import { Actor, Movie, Review } from "./model";
 var MovieSDK = /** @class */ (function () {
     function MovieSDK() {
         this.apiBaseUrl = 'https://search.imdbot.workers.dev/';
@@ -57,14 +57,14 @@ var MovieSDK = /** @class */ (function () {
                         return [4 /*yield*/, response.json()];
                     case 2:
                         data = _a.sent();
-                        return [2 /*return*/, data.description.map(function (movie) { return new Movie(movie["#TITLE"], movie["#IMG_POSTER"]); })];
+                        return [2 /*return*/, data.description.map(function (movie) { return new Movie(movie["#IMDB_ID"], movie["#TITLE"], movie["#IMG_POSTER"]); })];
                 }
             });
         });
     };
     MovieSDK.prototype.getMovieDetail = function (id) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data, movie, actor;
+            var response, data, movie, actor, reviews;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, fetch("".concat(this.apiBaseUrl, "?tt=").concat(id), {
@@ -80,7 +80,8 @@ var MovieSDK = /** @class */ (function () {
                         data = _a.sent();
                         movie = data.short;
                         actor = data.short.actor.map(function (rawActor) { return new Actor(rawActor.name, rawActor.url); });
-                        return [2 /*return*/, new Movie(movie.name, "", movie.description, actor, [], [])];
+                        reviews = movie.review ? [new Review(movie.review.author.name, movie.review.name, movie.review.reviewRating.ratingValue, movie.review.reviewBody, movie.review.dateCreated)] : [];
+                        return [2 /*return*/, new Movie(data.imdbId, movie.name, movie.image, movie.description, actor, reviews, movie.keywords.split(','))];
                 }
             });
         });

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback } from "react";
 import { useWindowDimensions } from "react-native";
 
@@ -10,19 +11,19 @@ type BREAK_POINTS = {
 };
 
 type BREAK_POINTS_LOGIC = {
-  base: string | number;
-  sm: string | number;
-  md: string | number;
-  lg: string | number;
-  xl: string | number;
+  base: any;
+  sm: any;
+  md: any;
+  lg: any;
+  xl: any;
 };
 
 const initialBreakPoints: BREAK_POINTS = {
   base: 0,
-  sm: 480,
-  md: 768,
-  lg: 992,
-  xl: 1280,
+  sm: 768,
+  md: 992,
+  lg: 1200,
+  xl: 1400,
 };
 
 function useMediaQuery(customBreakPoints?: BREAK_POINTS) {
@@ -47,7 +48,7 @@ function useMediaQuery(customBreakPoints?: BREAK_POINTS) {
   );
 
   const resultantValue = useCallback(
-    (base: string | number, sm?: string | number, md?: string | number, lg?: string | number, xl?: string | number) => {
+    (base: any, sm?: any, md?: any, lg?: any, xl?: any) => {
       if (width > breakPoints.base && width <= breakPoints.sm) {
         return base;
       } else if (width > breakPoints.sm && width <= breakPoints.md) {
@@ -80,7 +81,7 @@ function useMediaQuery(customBreakPoints?: BREAK_POINTS) {
 
   const mediaQueryLogic = useCallback(
     (
-      dimensions: Array<string | number> | (Partial<BREAK_POINTS_LOGIC> & { base: string | number })
+      dimensions: Array<any> | (Partial<BREAK_POINTS_LOGIC> & { base: any })
     ) => {
       if (Array.isArray(dimensions)) {
         const [base, sm, md, lg, xl] = dimensions;

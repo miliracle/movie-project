@@ -1,5 +1,6 @@
 class Movie {
     constructor(
+        public id: string,
         public title: string,
         public poster?: string,
         public description?: string,
@@ -18,10 +19,11 @@ class Actor {
 
 class Review {
     constructor(
-        public name: string,
-        public avatar: string,
+        public author: string,
+        public title: string,
         public rate: number,
         public comment: string,
+        public date: string,
     ){}
 }
 

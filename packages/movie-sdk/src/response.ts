@@ -27,6 +27,7 @@ interface Short {
     '@type': string;
     url: string;
     name: string;
+    image: string;
     description: string;
     genre: string[];
     datePublished: string;
@@ -34,16 +35,48 @@ interface Short {
     director: Actor[];
     creator: Creator[];
     duration: string;
+    review: Review;
+    keywords: string;
 }
+
 interface Creator {
     '@type': string;
     url: string;
     name?: string;
 }
+
 interface Actor {
     '@type': string;
     url: string;
     name: string;
+}
+
+interface Review {
+    '@type': string;
+    itemReviewed: ItemReviewed;
+    author: Author;
+    dateCreated: string;
+    inLanguage: string;
+    name: string;
+    reviewBody: string;
+    reviewRating: ReviewRating;
+}
+
+interface ItemReviewed {
+    '@type': string;
+    url: string;
+}
+
+interface Author {
+    '@type': string;
+    name: string;
+}
+
+interface ReviewRating {
+    '@type': string;
+    worstRating: number;
+    bestRating: number;
+    ratingValue: number;
 }
 
 export {

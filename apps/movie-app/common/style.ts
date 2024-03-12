@@ -1,5 +1,15 @@
 import { StyleSheet } from 'react-native';
 
+const BACKGROUND_COLOR = '#1F1F1F'
+const HEADER_BACKGROUND_COLOR = '#141414'
+const TEXT_COLOR = '#fff'
+
+export {
+  BACKGROUND_COLOR,
+  TEXT_COLOR,
+  HEADER_BACKGROUND_COLOR
+}
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
