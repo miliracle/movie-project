@@ -7,12 +7,13 @@ import { fetchDetailMovieAsync, selectMovieDetail, selectMovieDetailLoading } fr
 import { RootStackParamList } from '../../app/App';
 import useMediaQuery from '../../common/hooks/useMediaQuery';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import { BACKGROUND_COLOR } from '../../common/style';
 
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#1F1F1F',
+        backgroundColor: BACKGROUND_COLOR,
     },
     scrollContainer: {
         flex: 1,

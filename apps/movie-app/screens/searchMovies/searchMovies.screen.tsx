@@ -10,11 +10,12 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../app/App';
 import { Movie } from '@movie-project/movie-sdk/dist/model';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import { BACKGROUND_COLOR } from '../../common/style';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1F1F1F',
+    backgroundColor: BACKGROUND_COLOR,
   },
   scrollContainer: {
     flex: 1,
@@ -63,7 +64,7 @@ function SearchMoviesScreen({ navigation }: Props) {
           <View style={[styles.listContainer, {
             width: mQ([240, 760, 760, 1020, 1280])
           }]}>
-            {loading ? 
+            {loading ?
               <LoadingSpinner /> :
               movies.map((movie) =>
                 <Pressable
@@ -74,9 +75,9 @@ function SearchMoviesScreen({ navigation }: Props) {
                     key={movie.id}
                     id={movie.title}
                     poster={movie.poster || ''}
-                    title={movie.title} />                
+                    title={movie.title} />
                 </Pressable>
-            )}
+              )}
           </View>
         </View>
       </ScrollView>
