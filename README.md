@@ -35,6 +35,21 @@ yarn start
 - Search for movies by title, genre, or actor.
 - View movie details, including poster, release date, genre, and plot.
 
-## **License**
+## **Done**
 
-This project is licensed under the MIT License. See the **[LICENSE](https://www.codechat.co/LICENSE)** file for details.
+- Home Page
+- Search Functionality
+- Movie Detail Screen
+- Business Logic Separation Development: Using Yarn Workspace to:
+  - Implement the MovieSDK as a seprated packaged
+  - Intergrate well with the application
+- Cross-Platform Compatibility:
+  - The app runs smoothly on all major browsers (Chrome, Edge)
+  - Support responsive
+- State Manager Solution: Using Redux to manage the state
+
+## **Todo**
+
+- Optimize Loading Animation: Using Skeleton Effect
+- Optimize Loading Image Animation
+- Build the project as a cross-platform desktop app in Electron
